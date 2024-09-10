@@ -32,7 +32,7 @@ public class Film {
     @ManyToOne
     @JoinColumn(name="reziserID")
     private Reziser reziser;
-    @OneToMany
+    @OneToMany(mappedBy = "id.film")
     private List<Uloga> uloge;
     
     public Film() {

@@ -1,4 +1,3 @@
-
 package rs.ac.bg.fon.JavaMoviesApp.domain;
 
 import jakarta.persistence.Embeddable;
@@ -8,12 +7,14 @@ import java.util.Objects;
 
 @Embeddable
 public class UlogaId {
+
     @ManyToOne
     @JoinColumn(name = "glumacID")
     private Glumac glumac;
     @ManyToOne
-    @JoinColumn(name="filmID")
+    @JoinColumn(name = "filmID")
     private Film film;
+    private String nazivUloge;
 
     public UlogaId() {
     }
@@ -38,8 +39,13 @@ public class UlogaId {
     public void setFilm(Film film) {
         this.film = film;
     }
+    public String getNazivUloge() {
+        return nazivUloge;
+    }
 
-
+    public void setNazivUloge(String nazivUloge) {
+        this.nazivUloge = nazivUloge;
+    }
     @Override
     public int hashCode() {
         int hash = 5;
@@ -65,5 +71,5 @@ public class UlogaId {
         }
         return Objects.equals(this.film, other.film);
     }
-    
+
 }

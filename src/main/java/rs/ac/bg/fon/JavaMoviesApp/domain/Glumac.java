@@ -16,7 +16,7 @@ public class Glumac {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imePrezime;
-    @OneToMany
+    @OneToMany(mappedBy = "id.glumac")
     private List<Uloga> uloge;
     
     public Glumac() {
