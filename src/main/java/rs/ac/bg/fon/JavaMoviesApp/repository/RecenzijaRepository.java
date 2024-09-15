@@ -11,6 +11,6 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
  */
 @Repository
 public interface RecenzijaRepository extends JpaRepository<Recenzija, Long> {
-    List<Recenzija> findByFilmId(Long filmId);
+     List<Recenzija> findByFilm_IdAndKorisnik_Id(Long filmId, Long korisnikId);
 }
 

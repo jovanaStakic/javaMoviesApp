@@ -11,7 +11,10 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
  */
 @Repository
 public interface FilmRepository extends JpaRepository<Film, Long>{
-    List<Film> findByNaziv(String naziv);
-    List<Film> findByReziser_ImePrezime(String imePrezime);
-    List<Film> findByZanr_NazivZanra(String nazivZanra);
+     
+    List<Film> findByNazivAndKorisnik_Id(String naziv, Long korisnikId);
+
+    List<Film> findByReziser_IdAndKorisnik_Id(Long reziserId, Long korisnikId);
+
+    List<Film> findByZanr_IdAndKorisnik_Id(Long zanrId, Long korisnikId);
 }
