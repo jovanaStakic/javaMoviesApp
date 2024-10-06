@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Jovana Stakic
  */
-public class FilmDto {
+public class FilmDto implements ApplicationDto{
     private Long id;
     private String naziv;
     private Date datumIzlaska;

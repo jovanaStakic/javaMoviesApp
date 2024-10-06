@@ -8,5 +8,5 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Glumac;
  * @author Jovana Stakic
  */
 public interface GlumacService {
-    List<Glumac> loadAllActors();
+    List<Glumac> getAllGlumci();
 }

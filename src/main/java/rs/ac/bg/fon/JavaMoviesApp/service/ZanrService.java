@@ -9,5 +9,5 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Zanr;
  * @author Jovana Stakic
  */
 public interface ZanrService {
-    List<Zanr> loadAllGenres();
+    List<Zanr> getAllZanrovi();
 }

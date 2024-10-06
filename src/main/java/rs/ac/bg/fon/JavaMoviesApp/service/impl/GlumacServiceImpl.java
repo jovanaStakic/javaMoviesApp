@@ -19,7 +19,7 @@ public class GlumacServiceImpl implements GlumacService{
     }
 
     @Override
-    public List<Glumac> loadAllActors() {
+    public List<Glumac> getAllGlumci() {
         return glumacRepository.findAll();
     }
 }

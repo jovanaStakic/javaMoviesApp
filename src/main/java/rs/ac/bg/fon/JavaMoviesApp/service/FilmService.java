@@ -14,5 +14,5 @@ public interface FilmService {
     
     List<Film> getAllFilms();
     
-    List<Film> findFilmsByCriteria(Film film);
+    List<Film> findFilmoviByCriteria(Film film);
 }

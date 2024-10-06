@@ -9,5 +9,5 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Reziser;
  * @author Jovana Stakic
  */
 public interface ReziserService {
-    List<Reziser> loadAllDirectors();
+    List<Reziser> getAllReziseri();
 }

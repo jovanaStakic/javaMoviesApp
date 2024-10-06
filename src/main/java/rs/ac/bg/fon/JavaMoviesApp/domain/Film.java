@@ -1,6 +1,7 @@
 
 package rs.ac.bg.fon.JavaMoviesApp.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 
 @Entity
-public class Film {
+public class Film implements ApplicationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +32,7 @@ public class Film {
     @ManyToOne
     @JoinColumn(name="reziserID")
     private Reziser reziser;
-    @OneToMany(mappedBy = "id.film")
+    @OneToMany(mappedBy = "id.film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Uloga> uloge;
     
     public Film() {

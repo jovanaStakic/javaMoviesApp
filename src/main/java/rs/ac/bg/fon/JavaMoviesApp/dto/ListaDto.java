@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Jovana Stakic
  */
-public class ListaDto {
+public class ListaDto implements ApplicationDto{
     private Long id;
     private String naziv;
     private String opis;

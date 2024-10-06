@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 
 
 @Entity
-public class Uloga {
+public class Uloga implements ApplicationEntity{
     @EmbeddedId
     private UlogaId id;
    

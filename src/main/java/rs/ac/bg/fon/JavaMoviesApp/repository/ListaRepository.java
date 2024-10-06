@@ -11,6 +11,8 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
  */
 @Repository
 public interface ListaRepository extends JpaRepository<Lista, Long> {
-    List<Lista> findByNazivListe(String nazivListe);
-}
 
+    List<Lista> findByNazivListe(String nazivListe);
+
+    List<Lista> findByKorisnik_Id(Long korisnikId);
+}

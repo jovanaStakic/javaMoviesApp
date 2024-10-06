@@ -5,7 +5,7 @@ package rs.ac.bg.fon.JavaMoviesApp.dto;
  *
  * @author Jovana Stakic
  */
-public class ZanrDto {
+public class ZanrDto implements ApplicationDto{
     private Long id;
     private String naziv;
 

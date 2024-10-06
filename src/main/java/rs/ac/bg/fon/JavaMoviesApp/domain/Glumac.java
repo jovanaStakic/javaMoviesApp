@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 @Entity
-public class Glumac {
+public class Glumac implements ApplicationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

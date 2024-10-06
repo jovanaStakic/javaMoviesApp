@@ -21,7 +21,7 @@ public class ZanrServiceImpl implements ZanrService{
     }
 
     @Override
-    public List<Zanr> loadAllGenres() {
+    public List<Zanr> getAllZanrovi() {
         return zanrRepository.findAll();
     }
 }

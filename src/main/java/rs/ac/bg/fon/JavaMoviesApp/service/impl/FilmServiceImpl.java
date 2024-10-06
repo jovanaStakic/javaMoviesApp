@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.repository.FilmRepository;
+import rs.ac.bg.fon.JavaMoviesApp.repository.UlogaRepository;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
 /**
@@ -14,9 +15,11 @@ import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 @Service
 public class FilmServiceImpl implements FilmService{
       private final FilmRepository filmRepository;
+      private final UlogaRepository ulogaRepository;
 
-    public FilmServiceImpl(FilmRepository filmRepository) {
+    public FilmServiceImpl(FilmRepository filmRepository, UlogaRepository ulogaRepository) {
         this.filmRepository = filmRepository;
+        this.ulogaRepository=ulogaRepository;
     }
 
     @Transactional
@@ -26,7 +29,7 @@ public class FilmServiceImpl implements FilmService{
     }
 
     @Override
-    public List<Film> findFilmsByCriteria(Film film) {
+    public List<Film> findFilmoviByCriteria(Film film) {
          if (film.getNaziv() != null) {
             return filmRepository.findByNazivAndKorisnik_Id(film.getNaziv(),film.getKorisnik().getId());
         } else if (film.getReziser() != null && film.getReziser().getId() != null) {

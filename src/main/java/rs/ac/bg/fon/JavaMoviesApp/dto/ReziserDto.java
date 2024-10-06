@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author Jovana Stakic
  */
-public class ReziserDto {
+public class ReziserDto implements ApplicationDto{
     private Long id;
     private String imePrezime;
     private Date datumRodjenja;

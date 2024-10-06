@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Reziser {
+public class Reziser implements ApplicationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

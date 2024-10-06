@@ -1,20 +1,13 @@
+
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
 /**
  *
  * @author Jovana Stakic
  */
-public class KorisnikDto implements ApplicationDto{
-    private Long id;
+public class LoginKorisnikDto implements ApplicationDto{
     private String korisnickoIme;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String sifra;
 
     public String getKorisnickoIme() {
         return korisnickoIme;
@@ -22,6 +15,14 @@ public class KorisnikDto implements ApplicationDto{
 
     public void setKorisnickoIme(String korisnickoIme) {
         this.korisnickoIme = korisnickoIme;
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
     }
     
     

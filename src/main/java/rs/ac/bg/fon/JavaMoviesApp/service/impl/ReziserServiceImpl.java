@@ -20,7 +20,7 @@ public class ReziserServiceImpl implements ReziserService{
     }
 
     @Override
-    public List<Reziser> loadAllDirectors() {
+    public List<Reziser> getAllReziseri() {
         return reziserRepository.findAll();
     }
 }

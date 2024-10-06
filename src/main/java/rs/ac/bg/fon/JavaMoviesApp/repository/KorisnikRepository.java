@@ -11,5 +11,9 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
  */
 @Repository
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
+
     Optional<Korisnik> findByKorisnickoIme(String korisnickoIme);
+
+    boolean existsByKorisnickoIme(String korisnickoIme);
+
 }

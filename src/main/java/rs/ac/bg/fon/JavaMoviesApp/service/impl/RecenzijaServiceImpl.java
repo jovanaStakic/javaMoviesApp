@@ -2,6 +2,7 @@ package rs.ac.bg.fon.JavaMoviesApp.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
 import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
 import rs.ac.bg.fon.JavaMoviesApp.repository.RecenzijaRepository;
@@ -20,22 +21,24 @@ public class RecenzijaServiceImpl implements RecenzijaService{
     }
 
     @Override
-    public List<Recenzija> loadAllReviews() {
+    public List<Recenzija> getAllRecenzije() {
         return recenzijaRepository.findAll();
     }
 
     @Override
-    public Recenzija saveReview(Recenzija recenzija) {
+    @Transactional
+    public Recenzija saveRecenzija(Recenzija recenzija) {
         return recenzijaRepository.save(recenzija);
     }
 
     @Override
-    public List<Recenzija> findReviews(Recenzija recenzija) {
+    public List<Recenzija> findRecenzije(Recenzija recenzija) {
         return recenzijaRepository.findByFilm_IdAndKorisnik_Id(recenzija.getFilm().getId(), recenzija.getKorisnik().getId());
     }
 
     @Override
-    public void deleteReview(Long id) {
+    @Transactional
+    public void deleteRecenzija(Long id) {
         if (!recenzijaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Review not found.");
         }

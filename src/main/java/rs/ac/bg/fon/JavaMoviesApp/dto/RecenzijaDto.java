@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * @author Jovana Stakic
  */
-public class RecenzijaDto {
+public class RecenzijaDto implements ApplicationDto{
     private Long id;
     private int ocenaFilma;
     private String utisak;
