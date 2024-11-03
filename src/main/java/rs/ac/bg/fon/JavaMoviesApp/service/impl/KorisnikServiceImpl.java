@@ -1,5 +1,7 @@
 package rs.ac.bg.fon.JavaMoviesApp.service.impl;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +29,9 @@ public class KorisnikServiceImpl implements KorisnikService {
     }
 
     @Override
-    public Korisnik login(String korisnickoIme, String sifra) {
-        Korisnik korisnik = korisnikRepository.findByKorisnickoIme(korisnickoIme).orElseThrow(() -> new AuthenticationException("Korisnik nije pronadjen!"));
-        if(!passwordEncoder.matches(sifra, korisnik.getSifra()))
+    public Korisnik login(Korisnik korisnik) {
+        Korisnik existingKorisnik = korisnikRepository.findByKorisnickoIme(korisnik.getKorisnickoIme()).orElseThrow(() -> new AuthenticationException("Korisnik nije pronadjen!"));
+        if(!passwordEncoder.matches(korisnik.getSifra(),existingKorisnik.getSifra()))
             throw new AuthenticationException("Pogresna lozinka!");
         return korisnik;
     }
@@ -44,6 +46,12 @@ public class KorisnikServiceImpl implements KorisnikService {
         String encodedSifra=passwordEncoder.encode(korisnik.getSifra());
         korisnik.setSifra(encodedSifra);
         return korisnikRepository.save(korisnik);  
+    }
+
+   @Override
+    public UserDetails loadUserByUsername(String korisnickoIme) throws UsernameNotFoundException {
+        return korisnikRepository.findByKorisnickoIme(korisnickoIme)
+                .orElseThrow(() -> new UsernameNotFoundException("Korisnik nije pronađen sa korisničkim imenom: " + korisnickoIme));
     }
 
 }

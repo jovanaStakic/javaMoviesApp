@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package rs.ac.bg.fon.JavaMoviesApp.controller;
 
 import java.util.List;
@@ -17,7 +14,7 @@ import rs.ac.bg.fon.JavaMoviesApp.service.ZanrService;
 
 /**
  *
- * @author Administrator
+ * @author Jovana Stakic
  */ 
 @RestController
 @RequestMapping("/zanrovi")

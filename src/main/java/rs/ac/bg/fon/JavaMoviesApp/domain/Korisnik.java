@@ -5,10 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Korisnik implements ApplicationEntity{
+public class Korisnik implements UserDetails,ApplicationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -109,6 +113,21 @@ public class Korisnik implements ApplicationEntity{
     @Override
     public String toString() {
         return "Korisnik{" + "id=" + id + ", korisnickoIme=" + korisnickoIme + ", sifra=" + sifra + ", ime=" + ime + ", prezime=" + prezime + '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public String getPassword() {
+        return sifra;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.korisnickoIme;
     }
     
     

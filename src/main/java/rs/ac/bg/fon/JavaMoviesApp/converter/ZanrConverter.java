@@ -1,5 +1,6 @@
 package rs.ac.bg.fon.JavaMoviesApp.converter;
 
+import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Zanr;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ZanrDto;
 
@@ -7,6 +8,7 @@ import rs.ac.bg.fon.JavaMoviesApp.dto.ZanrDto;
  *
  * @author Jovana Stakic
  */
+@Component
 public class ZanrConverter implements GenericConverter<ZanrDto, Zanr> {
 
     @Override
