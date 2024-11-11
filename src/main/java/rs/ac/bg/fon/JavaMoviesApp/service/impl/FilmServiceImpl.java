@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
+import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.repository.FilmRepository;
 import rs.ac.bg.fon.JavaMoviesApp.repository.UlogaRepository;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
@@ -41,7 +42,7 @@ public class FilmServiceImpl implements FilmService{
     }
 
     @Override
-    public List<Film> getAllFilms() {
-        return filmRepository.findAll();
-    }
+    public List<Film> getAllFilmsByKorisnik(Long korisnikId) {
+        return filmRepository.findByKorisnik_Id(korisnikId);    }
+
 }

@@ -19,7 +19,7 @@ import rs.ac.bg.fon.JavaMoviesApp.service.KorisnikService;
  * @author Jovana Stakic
  */
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
 public class AuthController {
 
     private final RegisterKorisnikConverter registerKorisnikConverter;

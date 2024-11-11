@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class Lista implements ApplicationEntity{
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nazivListe;
+    @Temporal(TemporalType.DATE)
     private Date datumKreiranja;
     @ManyToOne
     @JoinColumn(name="korisnikID")

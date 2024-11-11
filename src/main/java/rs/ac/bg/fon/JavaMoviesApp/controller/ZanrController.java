@@ -3,6 +3,7 @@ package rs.ac.bg.fon.JavaMoviesApp.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import rs.ac.bg.fon.JavaMoviesApp.service.ZanrService;
  * @author Jovana Stakic
  */ 
 @RestController
-@RequestMapping("/zanrovi")
+@RequestMapping("/api")
 public class ZanrController {
 
     private final ZanrService zanrService;
@@ -26,11 +27,9 @@ public class ZanrController {
     public ZanrController(ZanrService zanrService) {
         this.zanrService = zanrService;
     }
-
-    @GetMapping
-    public List<ZanrDto> getAllZanrovi() {
-        return zanrService.getAllZanrovi().stream()
-                .map(zanrConverter::toDto)
-                .collect(Collectors.toList());
+    
+    @GetMapping("/zanrovi")
+    public ResponseEntity<List<ZanrDto>> getAllZanrovi() {
+        return ResponseEntity.ok(zanrService.getAllZanrovi().stream().map(zanrConverter::toDto).toList());
     }
 }

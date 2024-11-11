@@ -17,4 +17,6 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
     List<Film> findByReziser_IdAndKorisnik_Id(Long reziserId, Long korisnikId);
 
     List<Film> findByZanr_IdAndKorisnik_Id(Long zanrId, Long korisnikId);
+    
+    List<Film> findByKorisnik_Id(Long korisnikId);
 }

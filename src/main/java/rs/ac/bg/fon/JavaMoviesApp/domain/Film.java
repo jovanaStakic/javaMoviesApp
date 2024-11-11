@@ -2,6 +2,7 @@
 package rs.ac.bg.fon.JavaMoviesApp.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -19,18 +22,20 @@ public class Film implements ApplicationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String naziv;
+    @Temporal(TemporalType.DATE)
     private Date datumIzlaska;
     private int trajanjeFilma;
     private String drzavaPorekla;
     @ManyToOne
-    @JoinColumn(name="korisnikID")
+    @JoinColumn(name="korisnikID",nullable = false)
     private Korisnik korisnik;
     @ManyToOne
-    @JoinColumn(name = "zanrID")
+    @JoinColumn(name = "zanrID",nullable = false)
     private Zanr zanr;
     @ManyToOne
-    @JoinColumn(name="reziserID")
+    @JoinColumn(name="reziserID",nullable = false)
     private Reziser reziser;
     @OneToMany(mappedBy = "id.film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Uloga> uloge;
