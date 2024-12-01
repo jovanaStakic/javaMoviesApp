@@ -8,11 +8,14 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
  * @author Jovana Stakic
  */
 public interface RecenzijaService {
-    List<Recenzija> getAllRecenzije();
 
     Recenzija saveRecenzija(Recenzija recenzija);
+
+    List<Recenzija> getAllRecenzijeByKorisnik(Long korisnikId);
 
     List<Recenzija> findRecenzije(Recenzija recenzija);
 
     void deleteRecenzija(Long id);
+
+    Recenzija findRecenizjaById(Long id);
 }

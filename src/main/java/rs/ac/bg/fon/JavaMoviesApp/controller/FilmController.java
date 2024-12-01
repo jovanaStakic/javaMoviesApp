@@ -50,7 +50,10 @@ public class FilmController {
     }
     
     @PostMapping
-    public ResponseEntity<FilmDto> saveFilm(@RequestBody FilmDto filmDto){
+    public ResponseEntity<FilmDto> saveFilm(@RequestBody FilmDto filmDto, @AuthenticationPrincipal String username){
+        Korisnik korisnik = (Korisnik) korisnikService.loadUserByUsername(username);
+        filmDto.setKorisnikId(korisnik.getId());
+
         Film film=filmConverter.toEntity(filmDto);
         Film savedFilm=filmService.addFilm(film);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmConverter.toDto(savedFilm));

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
+import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
 import rs.ac.bg.fon.JavaMoviesApp.repository.FilmRepository;
 import rs.ac.bg.fon.JavaMoviesApp.repository.UlogaRepository;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
@@ -44,5 +45,10 @@ public class FilmServiceImpl implements FilmService{
     @Override
     public List<Film> getAllFilmsByKorisnik(Long korisnikId) {
         return filmRepository.findByKorisnik_Id(korisnikId);    }
+
+    @Override
+    public Film findFilmById(Long id) {
+        return filmRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Ne postoji film koji ima id: "+id));
+    }
 
 }

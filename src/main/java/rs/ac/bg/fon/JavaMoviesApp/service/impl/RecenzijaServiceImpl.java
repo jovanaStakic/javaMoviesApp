@@ -21,8 +21,8 @@ public class RecenzijaServiceImpl implements RecenzijaService{
     }
 
     @Override
-    public List<Recenzija> getAllRecenzije() {
-        return recenzijaRepository.findAll();
+    public List<Recenzija> getAllRecenzijeByKorisnik(Long korinsikId) {
+        return recenzijaRepository.findByKorisnik_Id( korinsikId);
     }
 
     @Override
@@ -44,4 +44,10 @@ public class RecenzijaServiceImpl implements RecenzijaService{
         }
         recenzijaRepository.deleteById(id);
     }
+
+    @Override
+    public Recenzija findRecenizjaById(Long id) {
+        return recenzijaRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Recenzija sa id-jem: "+id+" nije pronadjena"));
+    }
+
 }

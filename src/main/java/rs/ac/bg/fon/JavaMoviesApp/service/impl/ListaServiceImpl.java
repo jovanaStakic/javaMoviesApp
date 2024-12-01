@@ -47,12 +47,16 @@ public class ListaServiceImpl implements ListaService {
         if (!listaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Lista nije pronađena.");
         }
-      listaRepository.deleteById(id);
+        listaRepository.deleteById(id);
     }
 
     @Override
-    public List<Lista> findListaByNaziv(String naziv) {
-        return listaRepository.findByNazivListe(naziv);
+    public List<Lista> findListaByNazivAndKorisnik(String naziv, Long korisnikId) {
+        return listaRepository.findByNazivListeAndKorisnik_Id(naziv, korisnikId);
     }
 
+    @Override
+    public Lista findListaById(Long id) {
+        return listaRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Nije pronadjena lista sa id: "+id));
+    }
 }

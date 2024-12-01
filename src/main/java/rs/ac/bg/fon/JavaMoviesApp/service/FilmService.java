@@ -16,4 +16,6 @@ public interface FilmService {
     List<Film> getAllFilmsByKorisnik(Long korisnikId);
     
     List<Film> findFilmoviByCriteria(Film film);
+    
+    Film findFilmById(Long id);
 }

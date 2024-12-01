@@ -12,6 +12,7 @@ public interface ListaService {
     List<Lista> getAllListeByKorisnikId(Long korisnikId);
     Lista updateLista(Lista lista);
     void deleteLista(Long id);
-    List<Lista> findListaByNaziv(String naziv);
+    List<Lista> findListaByNazivAndKorisnik(String naziv, Long korisnikId);
+    Lista findListaById(Long id);
     
 }

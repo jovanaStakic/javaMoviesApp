@@ -1,5 +1,6 @@
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,10 +9,10 @@ import java.util.List;
  */
 public class ListaDto implements ApplicationDto{
     private Long id;
-    private String naziv;
-    private String opis;
+    private String nazivListe;
+    private Date datumKreiranja;
     private Long korisnikId;
-    private List<FilmDto> filmovi;
+    private List<Long> filmovi;
 
     public Long getId() {
         return id;
@@ -21,20 +22,20 @@ public class ListaDto implements ApplicationDto{
         this.id = id;
     }
 
-    public String getNaziv() {
-        return naziv;
+    public String getNazivListe() {
+        return nazivListe;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    public void setNazivListe(String nazivListe) {
+        this.nazivListe = nazivListe;
     }
 
-    public String getOpis() {
-        return opis;
+    public Date getDatumKreiranja() {
+        return datumKreiranja;
     }
 
-    public void setOpis(String opis) {
-        this.opis = opis;
+    public void setDatumKreiranja(Date datumKreiranja) {
+        this.datumKreiranja = datumKreiranja;
     }
 
     public Long getKorisnikId() {
@@ -45,11 +46,11 @@ public class ListaDto implements ApplicationDto{
         this.korisnikId = korisnikId;
     }
 
-    public List<FilmDto> getFilmovi() {
+    public List<Long> getFilmovi() {
         return filmovi;
     }
 
-    public void setFilmovi(List<FilmDto> filmovi) {
+    public void setFilmovi(List<Long> filmovi) {
         this.filmovi = filmovi;
     }
     

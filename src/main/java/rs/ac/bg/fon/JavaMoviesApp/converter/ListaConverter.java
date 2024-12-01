@@ -1,13 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package rs.ac.bg.fon.JavaMoviesApp.converter;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
+import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
+import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
+import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
+import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
+import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
 /**
  *
- * @author Administrator
+ * @author Jovana Stakic
  */
-public class ListaConverter {
+@Component
+public class ListaConverter implements GenericConverter<ListaDto, Lista> {
+    private final FilmService filmService;
+
+    public ListaConverter(FilmService filmService) {
+        this.filmService = filmService;
+    }
     
+      @Override
+    public Lista toEntity(ListaDto dto) {
+        Lista lista = new Lista();
+        lista.setId(dto.getId());
+        lista.setNazivListe(dto.getNazivListe());
+        lista.setDatumKreiranja(dto.getDatumKreiranja());
+        if (dto.getKorisnikId() != null) {
+            Korisnik korisnik = new Korisnik();
+            korisnik.setId(dto.getKorisnikId());
+            lista.setKorisnik(korisnik);
+        }
+
+        List<Film> filmovi = dto.getFilmovi().stream()
+                .map(filmId -> filmService.findFilmById(filmId)).collect(Collectors.toList());
+                        
+        lista.setFilmovi(filmovi);
+
+        return lista;
+    }
+
+    @Override
+    public ListaDto toDto(Lista entity) {
+        ListaDto listaDto = new ListaDto();
+        listaDto.setId(entity.getId());
+        listaDto.setNazivListe(entity.getNazivListe());
+        listaDto.setDatumKreiranja(entity.getDatumKreiranja());
+        if(entity.getKorisnik()!=null){
+            listaDto.setKorisnikId(entity.getKorisnik().getId());
+        }
+
+        List<Long> filmoviDto = entity.getFilmovi().stream()
+                .map(Film::getId)
+                .collect(Collectors.toList());
+        listaDto.setFilmovi(filmoviDto);
+
+        return listaDto;
+    }
+
 }
