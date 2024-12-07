@@ -27,11 +27,6 @@ public class ListaConverter implements GenericConverter<ListaDto, Lista> {
         lista.setId(dto.getId());
         lista.setNazivListe(dto.getNazivListe());
         lista.setDatumKreiranja(dto.getDatumKreiranja());
-        if (dto.getKorisnikId() != null) {
-            Korisnik korisnik = new Korisnik();
-            korisnik.setId(dto.getKorisnikId());
-            lista.setKorisnik(korisnik);
-        }
 
         List<Film> filmovi = dto.getFilmovi().stream()
                 .map(filmId -> filmService.findFilmById(filmId)).collect(Collectors.toList());
@@ -47,9 +42,6 @@ public class ListaConverter implements GenericConverter<ListaDto, Lista> {
         listaDto.setId(entity.getId());
         listaDto.setNazivListe(entity.getNazivListe());
         listaDto.setDatumKreiranja(entity.getDatumKreiranja());
-        if(entity.getKorisnik()!=null){
-            listaDto.setKorisnikId(entity.getKorisnik().getId());
-        }
 
         List<Long> filmoviDto = entity.getFilmovi().stream()
                 .map(Film::getId)

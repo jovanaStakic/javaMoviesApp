@@ -18,15 +18,9 @@ public class RecenzijaCoverter implements GenericConverter<RecenzijaDto, Recenzi
     public Recenzija toEntity(RecenzijaDto dto) {
         Recenzija recenzija = new Recenzija();
         recenzija.setId(dto.getId());
-        recenzija.setDatumKreiranja(dto.getDatumKreiranja());
+        recenzija.setDatumKreiranja(null);
         recenzija.setOcenaFilma(dto.getOcenaFilma());
         recenzija.setUtisak(dto.getUtisak());
-
-        if (dto.getKorisnikId() != null) {
-            Korisnik korisnik = new Korisnik();
-            korisnik.setId(dto.getKorisnikId());
-            recenzija.setKorisnik(korisnik);
-        }
 
         if (dto.getFilmId() != null) {
             Film film = new Film();
@@ -45,9 +39,6 @@ public class RecenzijaCoverter implements GenericConverter<RecenzijaDto, Recenzi
         dto.setOcenaFilma(entity.getOcenaFilma());
         dto.setUtisak(entity.getUtisak());
 
-        if (entity.getKorisnik() != null) {
-            dto.setKorisnikId(entity.getKorisnik().getId());
-        }
 
         if (entity.getFilm() != null) {
             FilmDto filmDto = new FilmDto();

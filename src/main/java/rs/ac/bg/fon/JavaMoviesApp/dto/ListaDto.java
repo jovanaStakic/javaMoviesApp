@@ -1,5 +1,8 @@
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -7,11 +10,17 @@ import java.util.List;
  *
  * @author Jovana Stakic
  */
-public class ListaDto implements ApplicationDto{
+public class ListaDto implements ApplicationDto {
+
     private Long id;
+
+    @NotBlank(message = "Naziv liste je obavezan.")
     private String nazivListe;
+
+    @NotNull(message = "Datum kreiranja liste je obavezan.")
     private Date datumKreiranja;
-    private Long korisnikId;
+
+    @NotEmpty(message = "Lista filmova ne sme biti prazna.")
     private List<Long> filmovi;
 
     public Long getId() {
@@ -38,13 +47,6 @@ public class ListaDto implements ApplicationDto{
         this.datumKreiranja = datumKreiranja;
     }
 
-    public Long getKorisnikId() {
-        return korisnikId;
-    }
-
-    public void setKorisnikId(Long korisnikId) {
-        this.korisnikId = korisnikId;
-    }
 
     public List<Long> getFilmovi() {
         return filmovi;
@@ -53,7 +55,5 @@ public class ListaDto implements ApplicationDto{
     public void setFilmovi(List<Long> filmovi) {
         this.filmovi = filmovi;
     }
-    
-    
-    
+
 }

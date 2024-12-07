@@ -1,5 +1,6 @@
 package rs.ac.bg.fon.JavaMoviesApp.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,7 @@ public class RecenzijaServiceImpl implements RecenzijaService{
     @Override
     @Transactional
     public Recenzija saveRecenzija(Recenzija recenzija) {
+        recenzija.setDatumKreiranja(new Date());
         return recenzijaRepository.save(recenzija);
     }
 

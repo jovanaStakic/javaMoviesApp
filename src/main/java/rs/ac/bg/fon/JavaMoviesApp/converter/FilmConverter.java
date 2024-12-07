@@ -28,12 +28,6 @@ public class FilmConverter implements GenericConverter<FilmDto, Film> {
         film.setTrajajanjeFilma(dto.getTrajanjeFilma());
         film.setDrzavaPorekla(dto.getDrzavaPorekla());
 
-        if (dto.getKorisnikId() != null) {
-            Korisnik korisnik = new Korisnik();
-            korisnik.setId(dto.getKorisnikId());
-            film.setKorisnik(korisnik);
-        }
-
         if (dto.getZanrId() != null) {
             Zanr zanr = new Zanr();
             zanr.setId(dto.getZanrId());
@@ -76,9 +70,6 @@ public class FilmConverter implements GenericConverter<FilmDto, Film> {
         dto.setTrajanjeFilma(entity.getTrajajanjeFilma());
         dto.setDrzavaPorekla(entity.getDrzavaPorekla());
 
-        if (entity.getKorisnik() != null) {
-            dto.setKorisnikId(entity.getKorisnik().getId());
-        }
 
         if (entity.getZanr() != null) {
             dto.setZanrId(entity.getZanr().getId());

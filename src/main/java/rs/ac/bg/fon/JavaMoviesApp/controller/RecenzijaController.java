@@ -1,5 +1,7 @@
 package rs.ac.bg.fon.JavaMoviesApp.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
@@ -52,26 +54,28 @@ public class RecenzijaController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<RecenzijaDto>> findRecenzije(@RequestBody RecenzijaDto recenzijaDto,@AuthenticationPrincipal String username) {
+    public ResponseEntity<List<RecenzijaDto>> findRecenzije(@RequestParam(required = true) @Min(0) Long filmId,@AuthenticationPrincipal String username) {
          Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
-        recenzijaDto.setKorisnikId(korisnik.getId());
-        Recenzija recenzija = recenzijaConverter.toEntity(recenzijaDto);
+         Recenzija recenzija=new Recenzija();
+        recenzija.setKorisnik(korisnik);
+        recenzija.setFilm(new Film());
+        recenzija.getFilm().setId(filmId);
         List<RecenzijaDto> recenzije = recenzijaService.findRecenzije(recenzija).stream()
                 .map(recenzijaConverter::toDto).toList();
         return ResponseEntity.ok(recenzije);
     }
 
     @PostMapping
-    public ResponseEntity<RecenzijaDto> createRecenzija(@RequestBody RecenzijaDto recenzijaDto,@AuthenticationPrincipal String username) {
+    public ResponseEntity<RecenzijaDto> createRecenzija(@Valid @RequestBody RecenzijaDto recenzijaDto,@AuthenticationPrincipal String username) {
         Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
-        recenzijaDto.setKorisnikId(korisnik.getId());
         Recenzija recenzija = recenzijaConverter.toEntity(recenzijaDto);
+        recenzija.setKorisnik(korisnik);
         Recenzija savedRecenzija = recenzijaService.saveRecenzija(recenzija);
         return ResponseEntity.status(HttpStatus.CREATED).body(recenzijaConverter.toDto(savedRecenzija));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRecenzija(@PathVariable Long id,@AuthenticationPrincipal String username) {
+    public ResponseEntity<String> deleteRecenzija(@PathVariable @Min(0) Long id,@AuthenticationPrincipal String username) {
          Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
          Recenzija recenzija=recenzijaService.findRecenizjaById(id);
          if(recenzija.getKorisnik().getId().equals(korisnik.getId())){

@@ -1,19 +1,31 @@
-
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  *
  * @author Jovana Stakic
  */
-public class RecenzijaDto implements ApplicationDto{
+public class RecenzijaDto implements ApplicationDto {
+
     private Long id;
+    @Min(value = 1, message = "Ocena filma mora biti najmanje 1.")
+    @Max(value = 10, message = "Ocena filma ne sme biti veća od 10.")
     private int ocenaFilma;
+
+    @NotBlank(message = "Utisak je obavezan.")
     private String utisak;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date datumKreiranja;
+
+    @NotNull(message = "Film je obavezan.")
     private FilmDto film;
-    private Long korisnikId;
 
     public Long getId() {
         return id;
@@ -47,14 +59,6 @@ public class RecenzijaDto implements ApplicationDto{
         this.datumKreiranja = datumKreiranja;
     }
 
-    public Long getKorisnikId() {
-        return korisnikId;
-    }
-
-    public void setKorisnikId(Long korisnikId) {
-        this.korisnikId = korisnikId;
-    }
-
     public FilmDto getFilmId() {
         return film;
     }
@@ -63,5 +67,4 @@ public class RecenzijaDto implements ApplicationDto{
         this.film = film;
     }
 
- 
 }

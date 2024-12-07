@@ -1,5 +1,11 @@
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -8,13 +14,28 @@ import java.util.List;
  * @author Jovana Stakic
  */
 public class FilmDto implements ApplicationDto{
+    
     private Long id;
+    @NotBlank(message = "Naziv filma je obavezan.")
+    @Size(max = 255, message = "Naziv filma ne sme biti duži od 255 karaktera.")
     private String naziv;
+    
+    @Past
+    @NotNull(message = "Datum izlaska filma je obavezan.")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datumIzlaska;
+    
+    @Positive(message = "Trajanje filma mora biti pozitivno.")
     private int trajanjeFilma;
+      
+    @Positive(message = "Trajanje filma mora biti pozitivno.")
+    @NotBlank(message = "Država porekla je obavezna.")
     private String drzavaPorekla;
-    private Long korisnikId;
+
+    @NotNull(message = "ID žanra je obavezan.")
     private Long zanrId;
+
+    @NotNull(message = "ID režisera je obavezan.")
     private Long reziserId;
     private List<UlogaDto> uloge;
 
@@ -56,14 +77,6 @@ public class FilmDto implements ApplicationDto{
 
     public void setDrzavaPorekla(String drzavaPorekla) {
         this.drzavaPorekla = drzavaPorekla;
-    }
-
-    public Long getKorisnikId() {
-        return korisnikId;
-    }
-
-    public void setKorisnikId(Long korisnikId) {
-        this.korisnikId = korisnikId;
     }
 
     public Long getZanrId() {

@@ -4,10 +4,8 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
-import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
 import rs.ac.bg.fon.JavaMoviesApp.repository.FilmRepository;
-import rs.ac.bg.fon.JavaMoviesApp.repository.UlogaRepository;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
 /**
@@ -17,11 +15,9 @@ import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 @Service
 public class FilmServiceImpl implements FilmService{
       private final FilmRepository filmRepository;
-      private final UlogaRepository ulogaRepository;
 
-    public FilmServiceImpl(FilmRepository filmRepository, UlogaRepository ulogaRepository) {
+    public FilmServiceImpl(FilmRepository filmRepository) {
         this.filmRepository = filmRepository;
-        this.ulogaRepository=ulogaRepository;
     }
 
     @Transactional

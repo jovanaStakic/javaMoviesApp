@@ -1,12 +1,17 @@
 
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  *
  * @author Jovana Stakic
  */
 public class LoginKorisnikDto implements ApplicationDto{
+    @NotBlank(message = "Korisničko ime je obavezno.")
     private String korisnickoIme;
+
+    @NotBlank(message = "Šifra je obavezna.")
     private String sifra;
 
     public String getKorisnickoIme() {

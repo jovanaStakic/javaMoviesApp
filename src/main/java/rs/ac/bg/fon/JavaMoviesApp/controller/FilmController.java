@@ -1,6 +1,7 @@
 
 package rs.ac.bg.fon.JavaMoviesApp.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class FilmController {
 
     @GetMapping
     public ResponseEntity<List<FilmDto>> getAllFilms(@AuthenticationPrincipal String username) {
-        Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
+       Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
        List<FilmDto> filmovi = filmService.getAllFilmsByKorisnik(korisnik.getId()).stream()
               .map(filmConverter::toDto)
               .collect(Collectors.toList());
@@ -50,16 +51,15 @@ public class FilmController {
     }
     
     @PostMapping
-    public ResponseEntity<FilmDto> saveFilm(@RequestBody FilmDto filmDto, @AuthenticationPrincipal String username){
+    public ResponseEntity<FilmDto> saveFilm(@Valid @RequestBody FilmDto filmDto, @AuthenticationPrincipal String username){
         Korisnik korisnik = (Korisnik) korisnikService.loadUserByUsername(username);
-        filmDto.setKorisnikId(korisnik.getId());
-
         Film film=filmConverter.toEntity(filmDto);
+        film.setKorisnik(korisnik);
         Film savedFilm=filmService.addFilm(film);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmConverter.toDto(savedFilm));
     }
     
-   @PostMapping("/search")
+   @GetMapping("/search")
    public ResponseEntity<List<FilmDto>> findFilmsByCriteria(
             @RequestBody SearchFilmDto searchDto,
             @AuthenticationPrincipal String username) {
