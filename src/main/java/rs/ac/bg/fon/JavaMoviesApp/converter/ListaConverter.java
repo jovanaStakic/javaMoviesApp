@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
-import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
+import rs.ac.bg.fon.JavaMoviesApp.dto.FilmDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
@@ -15,40 +15,44 @@ import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
  */
 @Component
 public class ListaConverter implements GenericConverter<ListaDto, Lista> {
-    private final FilmService filmService;
+    private final GenericConverter<FilmDto, Film> filmConverter;
 
-    public ListaConverter(FilmService filmService) {
-        this.filmService = filmService;
+    public ListaConverter(FilmConverter filmConverter) {
+        this.filmConverter = filmConverter;
     }
     
       @Override
     public Lista toEntity(ListaDto dto) {
-        Lista lista = new Lista();
+         Lista lista = new Lista();
         lista.setId(dto.getId());
         lista.setNazivListe(dto.getNazivListe());
-        lista.setDatumKreiranja(dto.getDatumKreiranja());
+        lista.setDatumKreiranja(null);
 
-        List<Film> filmovi = dto.getFilmovi().stream()
-                .map(filmId -> filmService.findFilmById(filmId)).collect(Collectors.toList());
-                        
-        lista.setFilmovi(filmovi);
+        if (dto.getFilmovi() != null) {
+            List<Film> filmovi = dto.getFilmovi().stream()
+                    .map(filmConverter::toEntity)
+                    .collect(Collectors.toList());
+            lista.setFilmovi(filmovi);
+        }
 
         return lista;
     }
 
     @Override
     public ListaDto toDto(Lista entity) {
-        ListaDto listaDto = new ListaDto();
-        listaDto.setId(entity.getId());
-        listaDto.setNazivListe(entity.getNazivListe());
-        listaDto.setDatumKreiranja(entity.getDatumKreiranja());
+         ListaDto dto = new ListaDto();
+        dto.setId(entity.getId());
+        dto.setNazivListe(entity.getNazivListe());
+        dto.setDatumKreiranja(entity.getDatumKreiranja());
 
-        List<Long> filmoviDto = entity.getFilmovi().stream()
-                .map(Film::getId)
-                .collect(Collectors.toList());
-        listaDto.setFilmovi(filmoviDto);
+        if (entity.getFilmovi() != null) {
+            List<FilmDto> filmovi = entity.getFilmovi().stream()
+                    .map(filmConverter::toDto)
+                    .collect(Collectors.toList());
+            dto.setFilmovi(filmovi);
+        }
 
-        return listaDto;
+        return dto;
     }
 
 }

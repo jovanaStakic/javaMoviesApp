@@ -29,7 +29,6 @@ public class RecenzijaServiceImpl implements RecenzijaService{
     @Override
     @Transactional
     public Recenzija saveRecenzija(Recenzija recenzija) {
-        recenzija.setDatumKreiranja(new Date());
         return recenzijaRepository.save(recenzija);
     }
 

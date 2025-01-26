@@ -1,25 +1,33 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nlLonbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.validator.constraints.UniqueElements;
 
 /**
  *
- * @author Jovana Stakic
+ * @author Administrator
  */
-public class ListaDto implements ApplicationDto {
+public class CreateUpdateListaDto implements ApplicationDto {
 
     private Long id;
 
+    @NotBlank(message = "Naziv liste je obavezan.")
     private String nazivListe;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datumKreiranja;
 
+    @UniqueElements(message = "Lista filmova ne sme sadržavati duplikate.")
     @NotEmpty(message = "Lista filmova ne sme biti prazna.")
-    private List<FilmDto> filmovi;
+    private List<Long> filmovi;
 
     public Long getId() {
         return id;
@@ -45,13 +53,13 @@ public class ListaDto implements ApplicationDto {
         this.datumKreiranja = datumKreiranja;
     }
 
-
-    public List<FilmDto> getFilmovi() {
+    public List<Long> getFilmovi() {
         return filmovi;
     }
 
-    public void setFilmovi(List<FilmDto> filmovi) {
+    public void setFilmovi(List<Long> filmovi) {
         this.filmovi = filmovi;
     }
-
+    
+    
 }

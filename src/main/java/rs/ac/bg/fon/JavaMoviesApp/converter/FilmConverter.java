@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Glumac;
-import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Reziser;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Uloga;
 import rs.ac.bg.fon.JavaMoviesApp.domain.UlogaId;

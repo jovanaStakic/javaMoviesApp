@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.bg.fon.JavaMoviesApp.converter.ReziserConverter;
-import rs.ac.bg.fon.JavaMoviesApp.domain.Reziser;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ReziserDto;
 import rs.ac.bg.fon.JavaMoviesApp.service.ReziserService;
 

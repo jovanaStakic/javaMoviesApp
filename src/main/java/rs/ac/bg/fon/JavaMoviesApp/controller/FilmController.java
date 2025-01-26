@@ -31,19 +31,16 @@ public class FilmController {
 
     private final FilmService filmService;
     private final FilmConverter filmConverter;
-    private final KorisnikService korisnikService;
     private final SearchFilmConverter searchFilmConverter;
     
     public FilmController(FilmService filmService, FilmConverter filmConverter,KorisnikService korisnikService,SearchFilmConverter searchFilmConverter) {
         this.filmService = filmService;
         this.filmConverter = filmConverter;
-        this.korisnikService=korisnikService;
         this.searchFilmConverter=searchFilmConverter;
     }
 
     @GetMapping
-    public ResponseEntity<List<FilmDto>> getAllFilms(@AuthenticationPrincipal String username) {
-       Korisnik korisnik=(Korisnik) korisnikService.loadUserByUsername(username);
+    public ResponseEntity<List<FilmDto>> getAllFilms(@AuthenticationPrincipal Korisnik korisnik) {
        List<FilmDto> filmovi = filmService.getAllFilmsByKorisnik(korisnik.getId()).stream()
               .map(filmConverter::toDto)
               .collect(Collectors.toList());
@@ -51,20 +48,21 @@ public class FilmController {
     }
     
     @PostMapping
-    public ResponseEntity<FilmDto> saveFilm(@Valid @RequestBody FilmDto filmDto, @AuthenticationPrincipal String username){
-        Korisnik korisnik = (Korisnik) korisnikService.loadUserByUsername(username);
+    public ResponseEntity<FilmDto> saveFilm(@Valid @RequestBody FilmDto filmDto, @AuthenticationPrincipal Korisnik korisnik){
         Film film=filmConverter.toEntity(filmDto);
         film.setKorisnik(korisnik);
         Film savedFilm=filmService.addFilm(film);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmConverter.toDto(savedFilm));
     }
     
+    /*
+    ** Metoda nije dobra jer pretrazuje kao OR a treba AND 
+    */
    @GetMapping("/search")
    public ResponseEntity<List<FilmDto>> findFilmsByCriteria(
             @RequestBody SearchFilmDto searchDto,
-            @AuthenticationPrincipal String username) {
+            @AuthenticationPrincipal Korisnik korisnik) {
 
-        Korisnik korisnik = (Korisnik) korisnikService.loadUserByUsername(username);
         
         Film kriterijum = searchFilmConverter.toEntity(searchDto);
         kriterijum.setKorisnik(korisnik);

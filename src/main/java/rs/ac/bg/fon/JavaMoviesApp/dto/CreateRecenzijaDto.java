@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Jovana Stakic
  */
-public class RecenzijaDto implements ApplicationDto {
+public class CreateRecenzijaDto implements ApplicationDto {
 
     private Long id;
     @Min(value = 1, message = "Ocena filma mora biti najmanje 1.")
@@ -24,8 +24,8 @@ public class RecenzijaDto implements ApplicationDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datumKreiranja;
 
-    @NotNull(message = "Film je obavezan.")
-    private FilmDto film;
+    @NotNull(message = "Film ID je obavezan.")
+    private Long filmId;
 
     public Long getId() {
         return id;
@@ -59,12 +59,11 @@ public class RecenzijaDto implements ApplicationDto {
         this.datumKreiranja = datumKreiranja;
     }
 
-    public FilmDto getFilmId() {
-        return film;
+    public Long getFilmId() {
+        return filmId;
     }
 
-    public void setFilmId(FilmDto film) {
-        this.film = film;
+    public void setFilmId(Long filmId) {
+        this.filmId = filmId;
     }
-
 }

@@ -12,23 +12,23 @@ import rs.ac.bg.fon.JavaMoviesApp.dto.RegisterKorisnikDto;
 public class RegisterKorisnikConverter implements GenericConverter<RegisterKorisnikDto, Korisnik> {
 
     @Override
-    public Korisnik toEntity(RegisterKorisnikDto dto) {
+    public Korisnik toEntity(RegisterKorisnikDto registerKorisnikDto) {
         Korisnik korisnik = new Korisnik();
-        korisnik.setKorisnickoIme(dto.getKorisnickoIme());
-        korisnik.setSifra(dto.getSifra());
-        korisnik.setIme(dto.getIme());
-        korisnik.setPrezime(dto.getPrezime());
+        korisnik.setKorisnickoIme(registerKorisnikDto.getKorisnickoIme());
+        korisnik.setSifra(registerKorisnikDto.getSifra());
+        korisnik.setIme(registerKorisnikDto.getIme());
+        korisnik.setPrezime(registerKorisnikDto.getPrezime());
         return korisnik;
     }
 
     @Override
-    public RegisterKorisnikDto toDto(Korisnik entity) {
-        RegisterKorisnikDto dto = new RegisterKorisnikDto();
-        dto.setKorisnickoIme(entity.getKorisnickoIme());
-        dto.setSifra(entity.getSifra());
-        dto.setIme(entity.getIme());
-        dto.setPrezime(entity.getPrezime());
-        return dto;
+    public RegisterKorisnikDto toDto(Korisnik korisnikEntity) {
+        RegisterKorisnikDto registerKorisnikDto = new RegisterKorisnikDto();
+        registerKorisnikDto.setKorisnickoIme(korisnikEntity.getKorisnickoIme());
+        registerKorisnikDto.setSifra(korisnikEntity.getSifra());
+        registerKorisnikDto.setIme(korisnikEntity.getIme());
+        registerKorisnikDto.setPrezime(korisnikEntity.getPrezime());
+        return registerKorisnikDto;
     }
 
 }

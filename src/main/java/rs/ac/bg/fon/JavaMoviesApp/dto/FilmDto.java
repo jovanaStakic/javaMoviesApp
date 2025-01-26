@@ -28,7 +28,6 @@ public class FilmDto implements ApplicationDto{
     @Positive(message = "Trajanje filma mora biti pozitivno.")
     private int trajanjeFilma;
       
-    @Positive(message = "Trajanje filma mora biti pozitivno.")
     @NotBlank(message = "Država porekla je obavezna.")
     private String drzavaPorekla;
 
@@ -37,6 +36,8 @@ public class FilmDto implements ApplicationDto{
 
     @NotNull(message = "ID režisera je obavezan.")
     private Long reziserId;
+    
+    @NotNull(message="Uloge su obavezne.")
     private List<UlogaDto> uloge;
 
     public Long getId() {

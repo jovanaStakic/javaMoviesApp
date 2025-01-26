@@ -35,9 +35,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterKorisnikDto dto) {
+    public ResponseEntity<String> register(@RequestBody RegisterKorisnikDto regosterKorisnikDto) {
         System.out.println("Register route accessed");
-        Korisnik korisnik = registerKorisnikConverter.toEntity(dto);
+        Korisnik korisnik = registerKorisnikConverter.toEntity(regosterKorisnikDto);
         korisnikService.register(korisnik);
         return ResponseEntity.status(HttpStatus.CREATED).body("Korisnik uspešno registrovan!");
     }

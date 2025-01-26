@@ -5,6 +5,7 @@ package rs.ac.bg.fon.JavaMoviesApp.jwt;
  * @author Jovana Stakic
  */
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,14 +17,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.Collections;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
+import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+    private final UserDetailsService userDetailsService;
+    
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
+        this.userDetailsService=userDetailsService;
     }
 
     @Override
@@ -37,9 +42,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token != null && jwtUtil.validateToken(token)) {
             Claims claims = jwtUtil.getClaims(token);
             String username = claims.getSubject();
+            Korisnik existingKorisnik=(Korisnik) userDetailsService.loadUserByUsername(username);
+           
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    username, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+                    existingKorisnik, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
             SecurityContextHolder.getContext().setAuthentication(authToken);
+            
         }
 
         chain.doFilter(request, response);
@@ -49,7 +57,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String headerAuth = request.getHeader("Authorization");
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7);
-        }
-        return null;
+        }else throw new JwtException("Nedostaje Bearer token!");
     }
 }

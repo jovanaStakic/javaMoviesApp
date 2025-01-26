@@ -12,18 +12,18 @@ import rs.ac.bg.fon.JavaMoviesApp.dto.LoginKorisnikDto;
 public class LoginKorisnikConverter  implements GenericConverter<LoginKorisnikDto, Korisnik> {
 
     @Override
-    public Korisnik toEntity(LoginKorisnikDto dto) {
+    public Korisnik toEntity(LoginKorisnikDto loginKorisnikDto) {
         Korisnik korisnik = new Korisnik();
-        korisnik.setKorisnickoIme(dto.getKorisnickoIme());
-        korisnik.setSifra(dto.getSifra());
+        korisnik.setKorisnickoIme(loginKorisnikDto.getKorisnickoIme());
+        korisnik.setSifra(loginKorisnikDto.getSifra());
         return korisnik;
     }
 
     @Override
-    public LoginKorisnikDto toDto(Korisnik entity) {
-        LoginKorisnikDto dto = new LoginKorisnikDto();
-        dto.setKorisnickoIme(entity.getKorisnickoIme());
-        dto.setSifra(entity.getSifra());
-        return dto;
+    public LoginKorisnikDto toDto(Korisnik korisnikEntity) {
+        LoginKorisnikDto loginKorisnikDto = new LoginKorisnikDto();
+        loginKorisnikDto.setKorisnickoIme(korisnikEntity.getKorisnickoIme());
+        loginKorisnikDto.setSifra(korisnikEntity.getSifra());
+        return loginKorisnikDto;
     }
 }

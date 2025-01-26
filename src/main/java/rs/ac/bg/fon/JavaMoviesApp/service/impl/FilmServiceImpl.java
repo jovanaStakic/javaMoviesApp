@@ -25,7 +25,9 @@ public class FilmServiceImpl implements FilmService{
     public Film addFilm(Film film) {
         return filmRepository.save(film);
     }
-
+    /*
+    ** Nije dobra metoda, treba ispraviti da radi kao AND
+    */
     @Override
     public List<Film> findFilmoviByCriteria(Film film) {
          if (film.getNaziv() != null) {
