@@ -54,10 +54,7 @@ public class FilmController {
         Film savedFilm=filmService.addFilm(film);
         return ResponseEntity.status(HttpStatus.CREATED).body(filmConverter.toDto(savedFilm));
     }
-    
-    /*
-    ** Metoda nije dobra jer pretrazuje kao OR a treba AND 
-    */
+  
    @GetMapping("/search")
    public ResponseEntity<List<FilmDto>> findFilmsByCriteria(
             @RequestBody SearchFilmDto searchDto,

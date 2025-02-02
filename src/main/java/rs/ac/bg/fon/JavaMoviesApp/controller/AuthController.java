@@ -1,5 +1,6 @@
 package rs.ac.bg.fon.JavaMoviesApp.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,16 +36,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterKorisnikDto regosterKorisnikDto) {
-        System.out.println("Register route accessed");
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterKorisnikDto regosterKorisnikDto) {
         Korisnik korisnik = registerKorisnikConverter.toEntity(regosterKorisnikDto);
         korisnikService.register(korisnik);
         return ResponseEntity.status(HttpStatus.CREATED).body("Korisnik uspešno registrovan!");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginKorisnikDto loginKorisnikDto) {
-        System.out.println("Login route accessed");
+    public ResponseEntity<String> loginUser(@Valid @RequestBody LoginKorisnikDto loginKorisnikDto) {
         Korisnik korisnik = korisnikService.login(loginKorisnikConverter.toEntity(loginKorisnikDto));
         String token = jwtUtil.generateToken(korisnik.getKorisnickoIme());
         return ResponseEntity.ok("Bearer " + token);

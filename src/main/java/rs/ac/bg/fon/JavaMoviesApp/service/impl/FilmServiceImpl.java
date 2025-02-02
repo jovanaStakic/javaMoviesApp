@@ -7,6 +7,7 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
 import rs.ac.bg.fon.JavaMoviesApp.repository.FilmRepository;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
+import rs.ac.bg.fon.JavaMoviesApp.specification.FilmSpecification;
 
 /**
  *
@@ -25,19 +26,10 @@ public class FilmServiceImpl implements FilmService{
     public Film addFilm(Film film) {
         return filmRepository.save(film);
     }
-    /*
-    ** Nije dobra metoda, treba ispraviti da radi kao AND
-    */
+  
     @Override
-    public List<Film> findFilmoviByCriteria(Film film) {
-         if (film.getNaziv() != null) {
-            return filmRepository.findByNazivAndKorisnik_Id(film.getNaziv(),film.getKorisnik().getId());
-        } else if (film.getReziser() != null && film.getReziser().getId() != null) {
-            return filmRepository.findByReziser_IdAndKorisnik_Id(film.getReziser().getId(),film.getKorisnik().getId());
-        } else if (film.getZanr() != null && film.getZanr().getId() != null) {
-            return filmRepository.findByZanr_IdAndKorisnik_Id(film.getZanr().getId(),film.getKorisnik().getId());
-        }
-        return List.of();
+    public List<Film> findFilmoviByCriteria(Film kriterijum) {
+        return filmRepository.findAll(new FilmSpecification(kriterijum));
     }
 
     @Override

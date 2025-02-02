@@ -7,7 +7,6 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
 import rs.ac.bg.fon.JavaMoviesApp.dto.FilmDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
-import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
 /**
  *
@@ -15,15 +14,16 @@ import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
  */
 @Component
 public class ListaConverter implements GenericConverter<ListaDto, Lista> {
+
     private final GenericConverter<FilmDto, Film> filmConverter;
 
     public ListaConverter(FilmConverter filmConverter) {
         this.filmConverter = filmConverter;
     }
-    
-      @Override
+
+    @Override
     public Lista toEntity(ListaDto dto) {
-         Lista lista = new Lista();
+        Lista lista = new Lista();
         lista.setId(dto.getId());
         lista.setNazivListe(dto.getNazivListe());
         lista.setDatumKreiranja(null);
@@ -40,7 +40,7 @@ public class ListaConverter implements GenericConverter<ListaDto, Lista> {
 
     @Override
     public ListaDto toDto(Lista entity) {
-         ListaDto dto = new ListaDto();
+        ListaDto dto = new ListaDto();
         dto.setId(entity.getId());
         dto.setNazivListe(entity.getNazivListe());
         dto.setDatumKreiranja(entity.getDatumKreiranja());

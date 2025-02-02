@@ -1,4 +1,3 @@
-
 package rs.ac.bg.fon.JavaMoviesApp.converter;
 
 import java.util.Date;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
 import rs.ac.bg.fon.JavaMoviesApp.dto.CreateUpdateListaDto;
-import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
 import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 
 /**
@@ -16,14 +14,15 @@ import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
  * @author Jovana Stakic
  */
 @Component
-public class CreateUpdateListaConverter implements GenericConverter<CreateUpdateListaDto, Lista>{
-      private final FilmService filmService;
+public class CreateUpdateListaConverter implements GenericConverter<CreateUpdateListaDto, Lista> {
+
+    private final FilmService filmService;
 
     public CreateUpdateListaConverter(FilmService filmService) {
         this.filmService = filmService;
     }
-    
-      @Override
+
+    @Override
     public Lista toEntity(CreateUpdateListaDto dto) {
         Lista lista = new Lista();
         lista.setId(dto.getId());
@@ -32,7 +31,7 @@ public class CreateUpdateListaConverter implements GenericConverter<CreateUpdate
 
         List<Film> filmovi = dto.getFilmovi().stream()
                 .map(filmId -> filmService.findFilmById(filmId)).collect(Collectors.toList());
-                        
+
         lista.setFilmovi(filmovi);
 
         return lista;

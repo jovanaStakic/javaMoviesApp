@@ -6,6 +6,8 @@ import rs.ac.bg.fon.JavaMoviesApp.dto.ApplicationDto;
 /**
  *
  * @author Jovana Stakic
+ * @param <D>
+ * @param <E>
  */
 public interface GenericConverter <D extends ApplicationDto, E extends ApplicationEntity> {
 

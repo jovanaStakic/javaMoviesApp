@@ -1,4 +1,3 @@
-
 package rs.ac.bg.fon.JavaMoviesApp.domain;
 
 import jakarta.persistence.Entity;
@@ -9,16 +8,16 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
 
-
 @Entity
-public class Glumac implements ApplicationEntity{
+public class Glumac implements ApplicationEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imePrezime;
     @OneToMany(mappedBy = "id.glumac")
     private List<Uloga> uloge;
-    
+
     public Glumac() {
     }
 
@@ -43,11 +42,20 @@ public class Glumac implements ApplicationEntity{
         this.imePrezime = imePrezime;
     }
 
+    public List<Uloga> getUloge() {
+        return uloge;
+    }
+
+    public void setUloge(List<Uloga> uloge) {
+        this.uloge = uloge;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.imePrezime);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.imePrezime);
+        hash = 37 * hash + Objects.hashCode(this.uloge);
         return hash;
     }
 
@@ -66,14 +74,15 @@ public class Glumac implements ApplicationEntity{
         if (!Objects.equals(this.imePrezime, other.imePrezime)) {
             return false;
         }
-        return Objects.equals(this.id, other.id);
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.uloge, other.uloge);
     }
 
     @Override
     public String toString() {
-        return "Glumac{" + "id=" + id + ", imePrezime=" + imePrezime + '}';
+        return "Glumac{" + "id=" + id + ", imePrezime=" + imePrezime + ", uloge=" + uloge + '}';
     }
-    
-    
-    
+
 }

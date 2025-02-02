@@ -22,7 +22,6 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
 import rs.ac.bg.fon.JavaMoviesApp.dto.CreateUpdateListaDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
-import rs.ac.bg.fon.JavaMoviesApp.service.KorisnikService;
 import rs.ac.bg.fon.JavaMoviesApp.service.ListaService;
 
 /**
@@ -35,13 +34,11 @@ public class ListaController {
     
     private final ListaService listaService;
     private final ListaConverter listaConverter;
-    private final KorisnikService korisnikService;
     private final CreateUpdateListaConverter createUpdateListaConverter;
     
-    public ListaController(ListaService listaService, ListaConverter listaConverter, KorisnikService korisnikService,CreateUpdateListaConverter createUpdateListaConverter) {
+    public ListaController(ListaService listaService, ListaConverter listaConverter, CreateUpdateListaConverter createUpdateListaConverter) {
         this.listaService = listaService;
         this.listaConverter = listaConverter;
-        this.korisnikService = korisnikService;
         this.createUpdateListaConverter=createUpdateListaConverter;
     }
     
@@ -56,9 +53,7 @@ public class ListaController {
     @GetMapping
     public ResponseEntity<List<ListaDto>> getAllListe(@AuthenticationPrincipal Korisnik korisnik) {
         List<Lista> liste = listaService.getAllListeByKorisnikId(korisnik.getId());
-        List<ListaDto> listeDto = liste.stream()
-                .map(listaConverter::toDto)
-                .collect(Collectors.toList());
+        List<ListaDto> listeDto = liste.stream().map(listaConverter::toDto).collect(Collectors.toList());
         return ResponseEntity.ok(listeDto);
     }
     

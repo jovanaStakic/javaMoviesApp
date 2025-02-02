@@ -22,7 +22,6 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
 import rs.ac.bg.fon.JavaMoviesApp.dto.CreateRecenzijaDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.RecenzijaDto;
-import rs.ac.bg.fon.JavaMoviesApp.service.KorisnikService;
 import rs.ac.bg.fon.JavaMoviesApp.service.RecenzijaService;
 
 /**
@@ -35,15 +34,12 @@ public class RecenzijaController {
 
     private final RecenzijaService recenzijaService;
     private final RecenzijaCoverter recenzijaConverter;
-    private final KorisnikService korisnikService;
     private final CreateRecenzijaConverter createRecenzijaConverter;
 
-    public RecenzijaController(RecenzijaService recenzijaService, RecenzijaCoverter recenzijaConverter, KorisnikService korisnikService,
-            CreateRecenzijaConverter createRecenzijaConverter) {
+    public RecenzijaController(RecenzijaService recenzijaService, RecenzijaCoverter recenzijaConverter, CreateRecenzijaConverter createRecenzijaConverter) {
         this.recenzijaService = recenzijaService;
         this.recenzijaConverter = recenzijaConverter;
-        this.korisnikService = korisnikService;
-        this.createRecenzijaConverter=createRecenzijaConverter;
+        this.createRecenzijaConverter = createRecenzijaConverter;
     }
 
     @GetMapping
