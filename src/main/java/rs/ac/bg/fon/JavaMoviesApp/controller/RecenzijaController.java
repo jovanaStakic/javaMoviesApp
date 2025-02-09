@@ -58,7 +58,7 @@ public class RecenzijaController {
         recenzija.setFilm(new Film());
         recenzija.getFilm().setId(filmId);
         List<RecenzijaDto> recenzije = recenzijaService.findRecenzije(recenzija).stream()
-                .map(recenzijaConverter::toDto).toList();
+                .map(recenzijaConverter::toDto).collect(Collectors.toList());
         return ResponseEntity.ok(recenzije);
     }
 

@@ -59,11 +59,8 @@ public class FilmController {
    public ResponseEntity<List<FilmDto>> findFilmsByCriteria(
             @RequestBody SearchFilmDto searchDto,
             @AuthenticationPrincipal Korisnik korisnik) {
-
-        
         Film kriterijum = searchFilmConverter.toEntity(searchDto);
         kriterijum.setKorisnik(korisnik);
-
         List<FilmDto> filmovi = filmService.findFilmoviByCriteria(kriterijum).stream()
                 .map(filmConverter::toDto)
                 .collect(Collectors.toList());

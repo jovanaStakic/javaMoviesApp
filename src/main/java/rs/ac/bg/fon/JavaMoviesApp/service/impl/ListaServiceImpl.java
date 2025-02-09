@@ -1,13 +1,13 @@
 package rs.ac.bg.fon.JavaMoviesApp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
 import rs.ac.bg.fon.JavaMoviesApp.exception.BadRequestException;
 import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
 import rs.ac.bg.fon.JavaMoviesApp.repository.ListaRepository;
-import rs.ac.bg.fon.JavaMoviesApp.service.FilmService;
 import rs.ac.bg.fon.JavaMoviesApp.service.ListaService;
 
 /**
@@ -18,11 +18,9 @@ import rs.ac.bg.fon.JavaMoviesApp.service.ListaService;
 public class ListaServiceImpl implements ListaService {
 
     private final ListaRepository listaRepository;
-    private final FilmService filmService;
 
-    public ListaServiceImpl(ListaRepository listaRepository, FilmService filmService) {
+    public ListaServiceImpl(ListaRepository listaRepository) {
         this.listaRepository = listaRepository;
-        this.filmService = filmService;
     }
 
     @Override
@@ -67,6 +65,12 @@ public class ListaServiceImpl implements ListaService {
 
     @Override
     public Lista findListaById(Long id) {
-        return listaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nije pronadjena lista sa id: " + id));
+        Optional<Lista> optionalLista = listaRepository.findById(id);
+
+        if (optionalLista.isPresent()) {
+            return optionalLista.get();
+        } else {
+            throw new ResourceNotFoundException("Nije pronađena lista sa id: " + id);
+        }
     }
 }

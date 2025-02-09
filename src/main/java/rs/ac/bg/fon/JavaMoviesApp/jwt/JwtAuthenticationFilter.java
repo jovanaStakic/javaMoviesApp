@@ -16,7 +16,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 import org.springframework.util.StringUtils;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Korisnik;
@@ -43,9 +45,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Claims claims = jwtUtil.getClaims(token);
             String username = claims.getSubject();
             Korisnik existingKorisnik=(Korisnik) userDetailsService.loadUserByUsername(username);
-           
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    existingKorisnik, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(existingKorisnik, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authToken);
             
         }

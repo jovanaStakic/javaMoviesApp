@@ -2,6 +2,7 @@ package rs.ac.bg.fon.JavaMoviesApp.service.impl;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.exception.ResourceNotFoundException;
@@ -14,8 +15,9 @@ import rs.ac.bg.fon.JavaMoviesApp.specification.FilmSpecification;
  * @author Jovana Stakic
  */
 @Service
-public class FilmServiceImpl implements FilmService{
-      private final FilmRepository filmRepository;
+public class FilmServiceImpl implements FilmService {
+
+    private final FilmRepository filmRepository;
 
     public FilmServiceImpl(FilmRepository filmRepository) {
         this.filmRepository = filmRepository;
@@ -26,7 +28,7 @@ public class FilmServiceImpl implements FilmService{
     public Film addFilm(Film film) {
         return filmRepository.save(film);
     }
-  
+
     @Override
     public List<Film> findFilmoviByCriteria(Film kriterijum) {
         return filmRepository.findAll(new FilmSpecification(kriterijum));
@@ -34,11 +36,17 @@ public class FilmServiceImpl implements FilmService{
 
     @Override
     public List<Film> getAllFilmsByKorisnik(Long korisnikId) {
-        return filmRepository.findByKorisnik_Id(korisnikId);    }
+        return filmRepository.findByKorisnik_Id(korisnikId);
+    }
 
     @Override
     public Film findFilmById(Long id) {
-        return filmRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Ne postoji film koji ima id: "+id));
+        Optional<Film> optionalFilm = filmRepository.findById(id);
+        if (optionalFilm.isPresent()) {
+            return optionalFilm.get();
+        } else {
+            throw new ResourceNotFoundException("Ne postoji film koji ima id: " + id);
+        }
     }
 
 }

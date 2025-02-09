@@ -2,6 +2,7 @@
 package rs.ac.bg.fon.JavaMoviesApp.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,6 @@ public class ZanrController {
     
     @GetMapping("/zanrovi")
     public ResponseEntity<List<ZanrDto>> getAllZanrovi() {
-        return ResponseEntity.ok(zanrService.getAllZanrovi().stream().map(zanrConverter::toDto).toList());
+        return ResponseEntity.ok(zanrService.getAllZanrovi().stream().map(zanrConverter::toDto).collect(Collectors.toList()));
     }
 }
