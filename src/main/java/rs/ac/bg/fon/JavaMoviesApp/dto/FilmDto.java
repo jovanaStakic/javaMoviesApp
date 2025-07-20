@@ -1,108 +1,101 @@
 package rs.ac.bg.fon.JavaMoviesApp.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Jovana Stakic
- */
+
 public class FilmDto implements ApplicationDto{
-    
-    private Long id;
-    @NotBlank(message = "Naziv filma je obavezan.")
-    @Size(max = 255, message = "Naziv filma ne sme biti duži od 255 karaktera.")
-    private String naziv;
-    
-    @Past
-    @NotNull(message = "Datum izlaska filma je obavezan.")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date datumIzlaska;
-    
-    @Positive(message = "Trajanje filma mora biti pozitivno.")
-    private int trajanjeFilma;
-      
-    @NotBlank(message = "Država porekla je obavezna.")
-    private String drzavaPorekla;
+	
+	private Long id;
+	private String naziv;
+	private Date datumIzlaska;
+	private int trajanjeFilma;
+	private String drzavaPorekla;
+	private ZanrDto zanr;
+	private ReziserDto reziser;
+	private List<UlogaDto> uloge;
+	
+	
+	public FilmDto() {
+		super();
+	}
 
-    @NotNull(message = "ID žanra je obavezan.")
-    private Long zanrId;
+	public FilmDto(Long id, String naziv, Date datumIzlaska, int trajanjeFilma, String drzavaPorekla, ZanrDto zanr,
+			ReziserDto reziser, List<UlogaDto> uloge) {
+		super();
+		this.id = id;
+		this.naziv = naziv;
+		this.datumIzlaska = datumIzlaska;
+		this.trajanjeFilma = trajanjeFilma;
+		this.drzavaPorekla = drzavaPorekla;
+		this.zanr = zanr;
+		this.reziser = reziser;
+		this.uloge = uloge;
+	}
 
-    @NotNull(message = "ID režisera je obavezan.")
-    private Long reziserId;
-    
-    @NotNull(message="Uloge su obavezne.")
-    private List<UlogaDto> uloge;
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getNaziv() {
+		return naziv;
+	}
 
-    public String getNaziv() {
-        return naziv;
-    }
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
+	public Date getDatumIzlaska() {
+		return datumIzlaska;
+	}
 
-    public Date getDatumIzlaska() {
-        return datumIzlaska;
-    }
+	public void setDatumIzlaska(Date datumIzlaska) {
+		this.datumIzlaska = datumIzlaska;
+	}
 
-    public void setDatumIzlaska(Date datumIzlaska) {
-        this.datumIzlaska = datumIzlaska;
-    }
+	public int getTrajanjeFilma() {
+		return trajanjeFilma;
+	}
 
-    public int getTrajanjeFilma() {
-        return trajanjeFilma;
-    }
+	public void setTrajanjeFilma(int trajanjeFilma) {
+		this.trajanjeFilma = trajanjeFilma;
+	}
 
-    public void setTrajanjeFilma(int trajanjeFilma) {
-        this.trajanjeFilma = trajanjeFilma;
-    }
+	public String getDrzavaPorekla() {
+		return drzavaPorekla;
+	}
 
-    public String getDrzavaPorekla() {
-        return drzavaPorekla;
-    }
+	public void setDrzavaPorekla(String drzavaPorekla) {
+		this.drzavaPorekla = drzavaPorekla;
+	}
 
-    public void setDrzavaPorekla(String drzavaPorekla) {
-        this.drzavaPorekla = drzavaPorekla;
-    }
+	public ZanrDto getZanr() {
+		return zanr;
+	}
 
-    public Long getZanrId() {
-        return zanrId;
-    }
+	public void setZanr(ZanrDto zanr) {
+		this.zanr = zanr;
+	}
 
-    public void setZanrId(Long zanrId) {
-        this.zanrId = zanrId;
-    }
+	public ReziserDto getReziser() {
+		return reziser;
+	}
 
-    public Long getReziserId() {
-        return reziserId;
-    }
+	public void setReziser(ReziserDto reziser) {
+		this.reziser = reziser;
+	}
 
-    public void setReziserId(Long reziserId) {
-        this.reziserId = reziserId;
-    }
+	public List<UlogaDto> getUloge() {
+		return uloge;
+	}
 
-    public List<UlogaDto> getUloge() {
-        return uloge;
-    }
+	public void setUloge(List<UlogaDto> uloge) {
+		this.uloge = uloge;
+	}
 
-    public void setUloge(List<UlogaDto> uloge) {
-        this.uloge = uloge;
-    }
-    
-    
+	
 }

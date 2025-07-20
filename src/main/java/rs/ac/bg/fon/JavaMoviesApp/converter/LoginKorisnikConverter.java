@@ -20,10 +20,10 @@ public class LoginKorisnikConverter  implements GenericConverter<LoginKorisnikDt
     }
 
     @Override
-    public LoginKorisnikDto toDto(Korisnik korisnikEntity) {
+    public LoginKorisnikDto toDto(Korisnik korisnik) {
         LoginKorisnikDto loginKorisnikDto = new LoginKorisnikDto();
-        loginKorisnikDto.setKorisnickoIme(korisnikEntity.getKorisnickoIme());
-        loginKorisnikDto.setSifra(korisnikEntity.getSifra());
+        loginKorisnikDto.setKorisnickoIme(korisnik.getKorisnickoIme());
+        loginKorisnikDto.setSifra(korisnik.getSifra());
         return loginKorisnikDto;
     }
 }

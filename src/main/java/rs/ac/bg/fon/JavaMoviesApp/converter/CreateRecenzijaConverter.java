@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
 import rs.ac.bg.fon.JavaMoviesApp.dto.CreateRecenzijaDto;
-import rs.ac.bg.fon.JavaMoviesApp.dto.FilmDto;
+import rs.ac.bg.fon.JavaMoviesApp.dto.CreateFilmDto;
 
 /**
  *
@@ -39,7 +39,7 @@ public class CreateRecenzijaConverter implements GenericConverter<CreateRecenzij
         dto.setUtisak(entity.getUtisak());
 
         if (entity.getFilm() != null) {
-            FilmDto filmDto = new FilmDto();
+            CreateFilmDto filmDto = new CreateFilmDto();
             filmDto.setId(entity.getFilm().getId()); 
             dto.setFilmId(filmDto.getId());
         }

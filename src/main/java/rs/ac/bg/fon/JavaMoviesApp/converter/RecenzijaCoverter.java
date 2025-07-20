@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Recenzija;
-import rs.ac.bg.fon.JavaMoviesApp.dto.FilmDto;
+import rs.ac.bg.fon.JavaMoviesApp.dto.CreateFilmDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.RecenzijaDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.UlogaDto;
 
@@ -43,7 +43,7 @@ public class RecenzijaCoverter implements GenericConverter<RecenzijaDto, Recenzi
 
 
         if (entity.getFilm() != null) {
-            FilmDto filmDto = new FilmDto();
+            CreateFilmDto filmDto = new CreateFilmDto();
             filmDto.setId(entity.getFilm().getId());
             filmDto.setNaziv(entity.getFilm().getNaziv());
             filmDto.setDrzavaPorekla(entity.getFilm().getDrzavaPorekla());

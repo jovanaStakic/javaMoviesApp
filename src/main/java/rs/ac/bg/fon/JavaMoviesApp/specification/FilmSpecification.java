@@ -15,7 +15,8 @@ import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
  */
 public class FilmSpecification implements Specification<Film> {
 
-    private final Film kriterijum;
+	private static final long serialVersionUID = 1L;
+	private final Film kriterijum;
 
     public FilmSpecification(Film kriterijum) {
         this.kriterijum = kriterijum;

@@ -25,7 +25,7 @@ public class RecenzijaDto implements ApplicationDto {
     private Date datumKreiranja;
 
     @NotNull(message = "Film je obavezan.")
-    private FilmDto film;
+    private CreateFilmDto film;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class RecenzijaDto implements ApplicationDto {
         this.datumKreiranja = datumKreiranja;
     }
 
-    public FilmDto getFilmId() {
+    public CreateFilmDto getFilmId() {
         return film;
     }
 
-    public void setFilmId(FilmDto film) {
+    public void setFilmId(CreateFilmDto film) {
         this.film = film;
     }
 
