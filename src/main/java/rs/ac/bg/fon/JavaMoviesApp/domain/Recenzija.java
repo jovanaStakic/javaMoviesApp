@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -22,6 +23,8 @@ public class Recenzija implements ApplicationEntity{
     @Column(nullable = false)
     private Date datumKreiranja;
     private int ocenaFilma;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String utisak;
     @ManyToOne
     @JoinColumn(name="korisnikID", nullable = false)
