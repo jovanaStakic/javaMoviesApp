@@ -14,17 +14,9 @@ import java.util.Date;
 public class RecenzijaDto implements ApplicationDto {
 
     private Long id;
-    @Min(value = 1, message = "Ocena filma mora biti najmanje 1.")
-    @Max(value = 10, message = "Ocena filma ne sme biti veća od 10.")
     private int ocenaFilma;
-
-    @NotBlank(message = "Utisak je obavezan.")
     private String utisak;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datumKreiranja;
-
-    @NotNull(message = "Film je obavezan.")
     private CreateFilmDto film;
 
     public Long getId() {
@@ -59,11 +51,11 @@ public class RecenzijaDto implements ApplicationDto {
         this.datumKreiranja = datumKreiranja;
     }
 
-    public CreateFilmDto getFilmId() {
+    public CreateFilmDto getFilm() {
         return film;
     }
 
-    public void setFilmId(CreateFilmDto film) {
+    public void setFilm(CreateFilmDto film) {
         this.film = film;
     }
 

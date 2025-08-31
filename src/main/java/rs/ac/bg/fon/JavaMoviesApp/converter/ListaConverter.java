@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Film;
 import rs.ac.bg.fon.JavaMoviesApp.domain.Lista;
 import rs.ac.bg.fon.JavaMoviesApp.dto.CreateFilmDto;
+import rs.ac.bg.fon.JavaMoviesApp.dto.FilmDto;
 import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
 
 /**
@@ -15,9 +16,9 @@ import rs.ac.bg.fon.JavaMoviesApp.dto.ListaDto;
 @Component
 public class ListaConverter implements GenericConverter<ListaDto, Lista> {
 
-    private final GenericConverter<CreateFilmDto, Film> filmConverter;
+    private final GenericConverter<FilmDto, Film> filmConverter;
 
-    public ListaConverter(CreateFilmConverter filmConverter) {
+    public ListaConverter(FilmConverter filmConverter) {
         this.filmConverter = filmConverter;
     }
 
@@ -46,7 +47,7 @@ public class ListaConverter implements GenericConverter<ListaDto, Lista> {
         dto.setDatumKreiranja(entity.getDatumKreiranja());
 
         if (entity.getFilmovi() != null) {
-            List<CreateFilmDto> filmovi = entity.getFilmovi().stream()
+            List<FilmDto> filmovi = entity.getFilmovi().stream()
                     .map(filmConverter::toDto)
                     .collect(Collectors.toList());
             dto.setFilmovi(filmovi);

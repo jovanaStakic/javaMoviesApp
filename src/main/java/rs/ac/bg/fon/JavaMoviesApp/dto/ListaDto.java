@@ -19,7 +19,7 @@ public class ListaDto implements ApplicationDto {
     private Date datumKreiranja;
 
     @NotEmpty(message = "Lista filmova ne sme biti prazna.")
-    private List<CreateFilmDto> filmovi;
+    private List<FilmDto> filmovi;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class ListaDto implements ApplicationDto {
     }
 
 
-    public List<CreateFilmDto> getFilmovi() {
+    public List<FilmDto> getFilmovi() {
         return filmovi;
     }
 
-    public void setFilmovi(List<CreateFilmDto> filmovi) {
+    public void setFilmovi(List<FilmDto> filmovi) {
         this.filmovi = filmovi;
     }
 

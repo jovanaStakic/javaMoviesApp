@@ -80,7 +80,7 @@ public class ListaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         listaService.deleteLista(id);
-        return ResponseEntity.ok("Lista je uspešno obrisana.");
+        return ResponseEntity.noContent().build();
     }
     
     @GetMapping("/search")

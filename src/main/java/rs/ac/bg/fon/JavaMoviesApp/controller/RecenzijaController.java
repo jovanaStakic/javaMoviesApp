@@ -74,9 +74,9 @@ public class RecenzijaController {
     public ResponseEntity<String> deleteRecenzija(@PathVariable @Min(0) Long id, @AuthenticationPrincipal Korisnik korisnik) {
         Recenzija recenzija = recenzijaService.findRecenizjaById(id);
         if (!recenzija.getKorisnik().getId().equals(korisnik.getId())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
         recenzijaService.deleteRecenzija(id);
-        return ResponseEntity.ok("Recenzija je uspešno obrisana.");
+        return ResponseEntity.noContent().build();
     }
 }
