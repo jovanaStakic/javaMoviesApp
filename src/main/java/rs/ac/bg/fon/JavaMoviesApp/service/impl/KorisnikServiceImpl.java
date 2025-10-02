@@ -34,7 +34,7 @@ public class KorisnikServiceImpl implements KorisnikService, UserDetailsService 
         if (!passwordEncoder.matches(korisnik.getSifra(), existingKorisnik.getSifra())) {
             throw new AuthenticationException("Pogresna lozinka!");
         }
-        return korisnik;
+        return existingKorisnik;
     }
 
     @Override
